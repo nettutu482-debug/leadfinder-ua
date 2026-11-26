@@ -1,0 +1,6 @@
+{
+  "name": "LeadFinder Україна",
+  "description": "Інструмент для пошуку потенційних клієнтів серед малого та середнього бізнесу України через Google Places API (New).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
