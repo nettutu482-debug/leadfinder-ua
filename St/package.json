@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "NODE_ENV=development tsx server.ts",
-    "build": "vite build",
+    "build": "vite build && npm run build:api",
+    "build:api": "esbuild api/[...path].ts --bundle --platform=node --format=esm --outfile=api/[...path].mjs --external:pg-native",
     "start": "node server.ts",
     "preview": "vite preview",
-    "clean": "rm -rf dist server.js",
+    "clean": "rm -rf dist server.js api/*.mjs",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
