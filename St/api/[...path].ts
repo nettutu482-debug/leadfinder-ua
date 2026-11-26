@@ -2,22 +2,26 @@ import type { IncomingMessage, ServerResponse } from 'node:http';
 import path from 'node:path';
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
 
 let appInstancePromise: Promise<any> | null = null;
 
 function resolveEntryPath(): string {
+  const currentFileDir = path.dirname(fileURLToPath(import.meta.url));
   const candidates = [
     path.resolve(process.cwd(), 'server/app.ts'),
     path.resolve(process.cwd(), 'St/server/app.ts'),
-    path.resolve(__dirname, '../server/app.ts'),
-    path.resolve(__dirname, '../../server/app.ts'),
+    path.resolve(currentFileDir, '../server/app.ts'),
+    path.resolve(currentFileDir, '../../server/app.ts'),
   ];
+
   for (const candidate of candidates) {
     if (fs.existsSync(candidate)) {
       return candidate;
     }
   }
+
   throw new Error(`Could not locate server/app.ts. Checked: ${candidates.join(', ')}`);
 }
 
